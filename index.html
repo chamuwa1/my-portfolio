@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamuditha Hasaranga | Software Engineering Student</title>
+    
+    <!-- 
+      ==================================================
+      == SEO Meta Tags
+      ==================================================
+    -->
+    <meta name="description" content="A highly motivated software engineering student skilled in HTML, CSS, React, and JavaScript. Eager to expand knowledge in .NET development and build innovative solutions.">
+    <meta name="keywords" content="Chamuditha Hasaranga, Software Engineer, Software Student, React Developer, .NET, Java, C#, Portfolio, Web Developer">
+    <meta name="author" content="Chamuditha Hasaranga">
+    
+    <!-- Open Graph (for social media sharing) -->
+    <meta property="og:title" content="Chamuditha Hasaranga | Portfolio">
+    <meta property="og:description" content="A highly motivated software engineering student skilled in HTML, CSS, React, and JavaScript.">
+    <!-- NOTE: Replace 'YOUR_WEBSITE_URL' with your actual live URL -->
+    <meta property="og:url" content="YOUR_WEBSITE_URL">
+    <!-- NOTE: Replace this with a link to a hosted 1200x630 image for social sharing -->
+    <meta property="og:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=Chamuditha+Hasaranga">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card (for Twitter sharing) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Chamuditha Hasaranga | Portfolio">
+    <meta name="twitter:description" content="A highly motivated software engineering student skilled in HTML, CSS, React, and JavaScript.">
+    <!-- NOTE: Replace this with a link to a hosted 1200x630 image for social sharing -->
+    <meta name="twitter:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=Chamuditha+Hasaranga">
+    <!-- 
+      == End of SEO Meta Tags
+    -->
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <!-- Google Font (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- React & Babel CDN (for running JSX in the browser) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        /* Base styles */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712; /* gray-950 */
+            color: #f9fafb; /* gray-50 */
+            /* New: Subtle tech-grid background */
+            background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+
+        /* Standard icon sizes */
+        .icon {
+            width: 1.25rem; /* 20px */
+            height: 1.25rem; /* 20px */
+        }
+        .icon-lg {
+            width: 2.5rem; /* 40px */
+            height: 2.5rem; /* 40px */
+        }
+        
+        /* Fade-in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Subtle background gradient */
+        .section-bg-gradient {
+            background-image: radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.05), transparent 30%),
+                              radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05), transparent 30%);
+        }
+        
+        /* Back to top button styles */
+        #back-to-top {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        #back-to-top.show {
+            display: inline-flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Typing cursor effect */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: #a78bfa; /* violet-400 */
+            margin-left: 4px;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* New: Loader animation */
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- This is where your React app will be rendered -->
+    <div id="root"></div>
+
+    <!-- 
+      This script tag loads your React component.
+      The 'text/babel' type tells the Babel CDN to transpile your JSX.
+    -->
+    <script type="text/babel">
+        const { useState, useEffect, Fragment } = React;
+
+        // --- Data for Components ---
+        // This makes it easy to add/remove items later
+
+        const navLinks = [
+            { name: "Home", href: "#home" },
+            { name: "About", href: "#about" },
+            { name: "Skills", href: "#skills" },
+            { name: "Projects", href: "#projects" },
+            { name: "Education", href: "#education" },
+            { name: "Contact", href: "#contact" },
+        ];
+
+        const socialLinks = [
+            { name: "LinkedIn", href: "http://www.linkedin.com/in/chamuditha-hasaranga-586a74283", icon: "linkedin" },
+            { name: "GitHub", href: "https://github.com/chamuwa1", icon: "github" },
+            { name: "Email", href: "mailto:chamudithahasaranga@gmail.com", icon: "mail" },
+        ];
+
+        const softSkills = [
+            "Team Working",
+            "Analytical Thinking",
+            "Problem Solving",
+            "Clear Communication",
+            "Work Under Pressure",
+            "Leadership Qualities",
+        ];
+
+        const skillsData = [
+            {
+                title: "Web Development",
+                icon: "layout-grid",
+                skills: ["HTML5", "CSS3", "JavaScript", "React"],
+            },
+            {
+                title: "Programming Languages",
+                icon: "code-2",
+                skills: ["Java", "C#"],
+            },
+            {
+                title: "Database Systems",
+                icon: "database",
+                skills: ["MySQL", "MSSQL Server"],
+            },
+            {
+                title: "Tools & Platforms",
+                icon: "terminal-square",
+                skills: ["Visual Studio", "VS Code", "Intellij", "Postman", "Android Studio"],
+            },
+        ];
+
+        // --- UPDATED: Removed 'links' from projectsData ---
+        const projectsData = [
+            {
+                title: "Todo Application",
+                description: "Developed a full-stack application utilizing a .NET Core Web API for the backend and SQL Server (SSMS) for database management. Designed a responsive React.js frontend and integrated it with the backend using Axios for seamless API communication. Implemented CRUD operations and user authentication.",
+                tags: [".NET Core", "React.js", "SQL Server", "Axios"],
+            },
+            {
+                title: "Smart Weather Monitoring System",
+                description: "Developed and deployed a Smart Weather Monitoring System leveraging IoT technology to monitor and record temperature, humidity, pressure, and rainfall, featuring real-time data visualization through Blynk.",
+                tags: ["IoT", "Blynk"],
+            },
+            {
+                title: "Online Mobile Shopping Website",
+                description: "Developed a comprehensive online shopping experience for Mobicare, featuring an easy-to-use interface and integrated customer reviews; this initiative driven a 50% increase in average order value within six months.",
+                tags: ["Web Development", "UI/UX"],
+            },
+            {
+                title: "SL Tourism Guide Web",
+                description: "Created a dynamic Sri Lanka Tourism Guide webpage highlighting the island's iconic landmarks, rich cultural heritage, and traditional cuisines, offering travelers an engaging and informative experience.",
+                tags: ["HTML", "CSS", "JavaScript"],
+            },
+        ];
+
+        const educationData = [
+            {
+                date: "2023 - 2024",
+                title: "Higher National Diploma in Software Engineering",
+                institution: "National Institute of Business Management / Coventry University in UK"
+            },
+            {
+                date: "2022 - 2023",
+                title: "Diploma in Software Engineering",
+                institution: "National Institute of Business Management / Coventry University in UK"
+            },
+            {
+                date: "2020",
+                title: "GCE Advance Level",
+                institution: "KU/D.S.Senanayaka Central College"
+            }
+        ];
+
+        // --- React Components ---
+
+        const Header = () => {
+            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+            const toggleMobileMenu = () => {
+                setIsMobileMenuOpen(!isMobileMenuOpen);
+            };
+
+            const closeMobileMenu = () => {
+                setIsMobileMenuOpen(false);
+            };
+
+            return (
+                <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-gray-900/70 border-b border-gray-700/50">
+                    <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex justify-between items-center h-16">
+                            {/* Logo/Name */}
+                            <div className="flex-shrink-0">
+                                <a href="#home" className="text-2xl font-bold text-white" onClick={closeMobileMenu}>
+                                    Chamuditha Hasaranga
+                                </a>
+                            </div>
+                            
+                            {/* Desktop Nav Links */}
+                            <div className="hidden md:flex md:items-center md:space-x-8">
+                                {navLinks.map((link) => (
+                                    <a key={link.name} href={link.href} className="text-gray-300 hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                                        {link.name}
+                                    </a>
+                                ))}
+                            </div>
+
+                            {/* Social Links (Desktop) */}
+                            <div className="hidden md:flex items-center space-x-4">
+                                <a href={socialLinks.find(s => s.name === 'LinkedIn').href} target="_blank" className="text-gray-400 hover:text-indigo-400 transition-colors">
+                                    <span className="sr-only">LinkedIn</span>
+                                    <i data-lucide="linkedin" className="icon"></i>
+                                </a>
+                                <a href={socialLinks.find(s => s.name === 'GitHub').href} target="_blank" className="text-gray-400 hover:text-indigo-400 transition-colors">
+                                    <span className="sr-only">GitHub</span>
+                                    <i data-lucide="github" className="icon"></i>
+                                </a>
+                            </div>
+
+                            {/* Mobile Menu Button */}
+                            <div className="md:hidden flex items-center">
+                                <button
+                                    id="mobile-menu-button"
+                                    onClick={toggleMobileMenu}
+                                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                                >
+                                    <span className="sr-only">Open main menu</span>
+                                    <i data-lucide={isMobileMenuOpen ? "x" : "menu"} className="icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </nav>
+
+                    {/* Mobile Menu (Hidden by default) */}
+                    <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} absolute top-16 left-0 w-full bg-gray-900/95 backdrop-blur-lg shadow-lg`} id="mobile-menu">
+                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={closeMobileMenu}
+                                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                        </div>
+                        <div className="pt-4 pb-3 border-t border-gray-700">
+                            <div className="flex items-center justify-center space-x-6">
+                                <a href={socialLinks.find(s => s.name === 'LinkedIn').href} target="_blank" className="text-gray-400 hover:text-indigo-400 transition-colors">
+                                    <span className="sr-only">LinkedIn</span>
+                                    <i data-lucide="linkedin" className="icon"></i>
+                                </a>
+                                <a href={socialLinks.find(s => s.name === 'GitHub').href} target="_blank" className="text-gray-400 hover:text-indigo-400 transition-colors">
+                                    <span className="sr-only">GitHub</span>
+                                    <i data-lucide="github" className="icon"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const Hero = () => {
+            // Typing Animation Effect
+            useEffect(() => {
+                const typingTextElement = document.getElementById('typing-text');
+                if (!typingTextElement) return;
+
+                const textArray = [
+                    "Software Engineering Student",
+                    "React Developer",
+                    ".NET Enthusiast",
+                    "Full-Stack Developer"
+                ];
+                let textArrayIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+                let timeoutId;
+
+                function type() {
+                    const currentText = textArray[textArrayIndex];
+                    let displayText = '';
+
+                    if (isDeleting) {
+                        displayText = currentText.substring(0, charIndex - 1);
+                        charIndex--;
+                    } else {
+                        displayText = currentText.substring(0, charIndex + 1);
+                        charIndex++;
+                    }
+
+                    typingTextElement.textContent = displayText;
+                    let typeSpeed = isDeleting ? 100 : 200;
+
+                    if (!isDeleting && charIndex === currentText.length) {
+                        typeSpeed = 2000;
+                        isDeleting = true;
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        textArrayIndex = (textArrayIndex + 1) % textArray.length;
+                        typeSpeed = 500;
+                    }
+
+                    timeoutId = setTimeout(type, typeSpeed);
+                }
+                
+                // Start after a delay
+                timeoutId = setTimeout(type, 1000);
+
+                // Cleanup on component unmount
+                return () => clearTimeout(timeoutId);
+            }, []); // Empty dependency array means this runs once on mount
+
+            return (
+                <section id="home" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 section-bg-gradient">
+                    <div className="flex flex-col md:flex-row items-center gap-12">
+                        {/* Text Content */}
+                        <div className="md:w-3/5 text-center md:text-left">
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight">
+                                Hi, I'm 
+                                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">Chamuditha Hasaranga</span>
+                            </h1>
+                            <h2 className="mt-4 text-2xl sm:text-3xl font-semibold text-gray-300 h-10 sm:h-auto">
+                                <span id="typing-text"></span><span className="typing-cursor"></span>
+                            </h2>
+                            <p className="mt-6 text-lg text-gray-400 max-w-2xl mx-auto md:mx-0">
+                                A highly motivated student skilled in HTML, CSS, React, and JavaScript. Eager to expand my knowledge in .NET development while refining existing technical skills to build innovative and efficient solutions.
+                            </p>
+                            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                <a href="#projects" className="inline-block bg-indigo-600 text-white font-medium py-3 px-6 rounded-lg text-center hover:bg-indigo-700 transition-colors transform hover:scale-105">
+                                    View My Projects
+                                </a>
+                                <a href="#contact" className="inline-block bg-gray-700 text-gray-200 font-medium py-3 px-6 rounded-lg text-center hover:bg-gray-600 transition-colors transform hover:scale-105">
+                                    Get In Touch
+                                </a>
+                            </div>
+                        </div>
+                        {/* Image */}
+                        <div className="md:w-2/5 flex justify-center">
+                            {/* ==================================================
+                            ==  IMPORTANT: Add your image
+                            ==================================================
+                            1. Put 'profile.jpg' in the same folder as 'index.html'.
+                            2. Change the 'src' below from the placeholder to "profile.jpg".
+                            */}
+                            <img 
+                                src="profile.jpg" 
+                                alt="Chamuditha Hasaranga"
+                                className="rounded-full w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-cover border-8 border-gray-700 shadow-2xl"
+                            />
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const About = () => {
+            return (
+                <section id="about" className="py-24 bg-gray-950 fade-in-section">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-start">
+                        {/* About Text */}
+                        <div>
+                            <h2 className="text-3xl font-bold text-white sm:text-4xl mb-6">
+                                About Me
+                            </h2>
+                            <p className="text-lg text-gray-400 space-y-4">
+                                <span>
+                                    I am a natural leader with strong interpersonal and time management abilities, capable of taking responsibility and working collaboratively with diverse teams to achieve project goals effectively.
+                                </span>
+                                <span>
+                                    I thrive in dynamic environments and excel at ensuring tasks are completed on time and to the highest standard.
+                                </span>
+                            </p>
+                            <div className="mt-8">
+                                <h3 className="text-xl font-semibold text-white mb-4">Languages I Speak</h3>
+                                <div className="flex space-x-6">
+                                    <span className="text-gray-300 text-lg">English</span>
+                                    <span className="text-gray-300 text-lg">Sinhala</span>
+                                </div>
+                            </div>
+                        </div>
+                        {/* Soft Skills */}
+                        <div>
+                            <h3 className="text-2xl font-bold text-white mb-6">
+                                My Soft Skills
+                            </h3>
+                            <div className="flex flex-wrap gap-3">
+                                {softSkills.map((skill) => (
+                                    <span key={skill} className="bg-gray-800 text-indigo-300 text-sm font-medium px-4 py-2 rounded-full">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Skills = () => {
+            return (
+                <section id="skills" className="py-24 fade-in-section section-bg-gradient">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 className="text-3xl font-bold text-white sm:text-4xl text-center mb-12">
+                            My Tech Stack
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                            {skillsData.map((category) => (
+                                <div key={category.title} className="bg-gray-800 p-6 rounded-lg shadow-lg skill-card">
+                                    <i data-lucide={category.icon} className="icon-lg text-indigo-400 mb-4"></i>
+                                    <h3 className="text-xl font-semibold text-white mb-3">{category.title}</h3>
+                                    <ul className="space-y-2 text-gray-400">
+                                        {category.skills.map((skill) => (
+                                            <li key={skill}>{skill}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Projects = () => {
+            return (
+                <section id="projects" className="py-24 bg-gray-950 fade-in-section">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 className="text-3xl font-bold text-white sm:text-4xl text-center mb-12">
+                            Featured Projects
+                        </h2>
+                        <div className="grid md:grid-cols-2 gap-8">
+                            {projectsData.map((project) => (
+                                // --- UPDATED: Removed bottom links, added padding to tag section ---
+                                <div key={project.title} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:shadow-indigo-500/30 transition-all duration-300 hover:-translate-y-2">
+                                    <div className="p-6 flex-grow">
+                                        <h3 className="text-xl font-semibold text-white mb-3">{project.title}</h3>
+                                        <p className="text-gray-400">
+                                            {project.description}
+                                        </p>
+                                    </div>
+                                    <div className="p-6 bg-gray-800/50"> {/* Added pb-6 for spacing */}
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.tags.map((tag) => (
+                                                <span key={tag} className="bg-indigo-900 text-indigo-300 text-xs font-medium px-3 py-1 rounded-full">
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    {/* --- REMOVED Links Div --- */}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Education = () => {
+            return (
+                <section id="education" className="py-24 fade-in-section">
+                    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 className="text-3xl font-bold text-white sm:text-4xl text-center mb-12">
+                            Education
+                        </h2>
+                        <div className="relative border-l-2 border-gray-700/50 ml-4">
+                            {/* Timeline items */}
+                            {educationData.map((item, index) => (
+                                <div key={index} className="mb-10 ml-8">
+                                    <span className="absolute flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full -left-4 ring-8 ring-gray-900">
+                                        <i data-lucide="award" className="w-4 h-4 text-white"></i>
+                                    </span>
+                                    <time className="block mb-2 text-sm font-normal leading-none text-indigo-400">{item.date}</time>
+                                    <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                                    <p className="text-base font-normal text-gray-400">{item.institution}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Contact = () => {
+            // --- REMOVED: Gemini Feature State ---
+            
+            // --- REMOVED: copyToClipboard Function ---
+
+            // --- REMOVED: generateSuggestion Function ---
+
+
+            return (
+                <section id="contact" className="py-24 bg-gray-950 fade-in-section">
+                    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h2 className="text-3xl font-bold text-white sm:text-4xl">
+                            Get In Touch
+                        </h2>
+                        <p className="mt-4 text-lg text-gray-400">
+                            I'm always open to discussing new projects, creative ideas, or opportunities. Feel free to reach out!
+                        </p>
+                        <div className="mt-10 flex flex-col sm:flex-row justify-center gap-8">
+                            {/* Email */}
+                            <a href="mailto:chamudithahasaranga@gmail.com" className="flex flex-col items-center text-gray-300 hover:text-indigo-400 transition-colors">
+                                <i data-lucide="mail" className="icon-lg"></i>
+                                <span className="mt-2 font-medium">chamudithahasaranga@gmail.com</span>
+                            </a>
+                            {/* Phone */}
+                            <a href="tel:+94740935085" className="flex flex-col items-center text-gray-300 hover:text-indigo-400 transition-colors">
+                                <i data-lucide="phone" className="icon-lg"></i>
+                                <span className="mt-2 font-medium">+94 74 093 5085</span>
+                            </a>
+                            {/* Location */}
+                            <div className="flex flex-col items-center text-gray-300">
+                                <i data-lucide="map-pin" className="icon-lg"></i>
+                                <span className="mt-2 font-medium">No 96, Sandagala, Uhumeeya</span>
+                            </div>
+                        </div>
+
+                        {/* --- REMOVED: Gemini AI Feature Section --- */}
+
+                        {/* Contact Form */}
+                        <div className="mt-16 text-left">
+                           
+                            {/* ==================================================
+                            ==  Formspree Integration
+                            ==================================================
+                            1. Go to https://formspree.io/ and create a new form.
+                            2. Copy your form's unique Endpoint URL.
+                            3. Replace the placeholder URL in the 'action' attribute below with your unique URL.
+                            ==================================================
+                            */}
+                            <form action="https://formspree.io/f/xgvnjogr" method="POST" className="space-y-6">
+                                <div>
+                                    <label htmlFor="name" className="block text-sm font-medium text-gray-300">Your Name</label>
+                                    <div className="mt-1">
+                                        <input type="text" name="name" id="name" required className="w-full px-4 py-3 rounded-lg bg-gray-800 border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="John Doe" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-300">Your Email</label>
+                                    <div className="mt-1">
+                                        <input type="email" name="email" id="email" required className="w-full px-4 py-3 rounded-lg bg-gray-800 border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="you@example.com" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label htmlFor="message" className="block text-sm font-medium text-gray-300">Message</label>
+                                    <div className="mt-1">
+                                        <textarea id="message" name="message" rows="4" required className="w-full px-4 py-3 rounded-lg bg-gray-800 border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Hi Chamuditha, I'd like to talk about..."></textarea>
+                                    </div>
+                                </div>
+                                <div className="text-center">
+                                    <button type="submit" className="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm rounded-lg text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors transform hover:scale-105">
+                                        Send Message
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-950 border-t border-gray-800/50">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                        <p className="text-gray-500 text-sm">
+                            &copy; 2025 Chamuditha Hasaranga. All rights reserved.
+                        </p>
+                        <div className="flex space-x-6">
+                            {socialLinks.map((link) => (
+                                <a key={link.name} href={link.href} target="_blank" className="text-gray-500 hover:text-indigo-400 transition-colors">
+                                    <span className="sr-only">{link.name}</span>
+                                    <i data-lucide={link.icon} className="icon"></i>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        const BackToTopButton = () => {
+            const [isVisible, setIsVisible] = useState(false);
+
+            useEffect(() => {
+                const toggleVisibility = () => {
+                    if (window.scrollY > 300) {
+                        setIsVisible(true);
+                    } else {
+                        setIsVisible(false);
+                    }
+                };
+
+                window.addEventListener('scroll', toggleVisibility);
+
+                // Cleanup function
+                return () => window.removeEventListener('scroll', toggleVisibility);
+            }, []);
+
+            return (
+                <a 
+                    href="#home"
+                    id="back-to-top"
+                    className={`bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-full shadow-lg items-center justify-center ${isVisible ? 'show' : ''}`}
+                >
+                    <i data-lucide="arrow-up" className="w-5 h-5"></i>
+                    <span className="sr-only">Back to top</span>
+                </a>
+            );
+        };
+
+
+        // --- Main App Component ---
+
+        const App = () => {
+            // This effect runs once after the component mounts
+            useEffect(() => {
+                // 1. Initialize Lucide Icons
+                try {
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    } else {
+                        console.error("Lucide library not loaded.");
+                    }
+                } catch (e) {
+                    console.error("Error initializing lucide icons:", e);
+                }
+
+                // 2. Setup Scroll-in Animations
+                const sections = document.querySelectorAll('.fade-in-section');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            // Optional: unobserve after it's visible
+                            // observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1 // Trigger when 10% of the section is visible
+                });
+
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+
+                // Cleanup observer on unmount
+                return () => {
+                    sections.forEach(section => {
+                        if (observer) {
+                            observer.unobserve(section);
+                        }
+                    });
+                };
+            }, []); // Empty array ensures this runs only once on mount
+
+            // This effect runs every time the component updates
+            // We need this to re-create icons if the state changes (e.g., mobile menu)
+            useEffect(() => {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            });
+
+            return (
+                <Fragment>
+                    <Header />
+                    <main>
+                        <Hero />
+                        <About />
+                        <Skills />
+                        <Projects />
+                        <Education />
+                        <Contact />
+                    </main>
+                    <Footer />
+                    <BackToTopButton />
+                </Fragment>
+            );
+        };
+
+        // --- Render the App ---
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
+
