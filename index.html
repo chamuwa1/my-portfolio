@@ -5,33 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chamuditha Hasaranga | Software Engineering Student</title>
     
-    <!-- 
-      ==================================================
-      == SEO Meta Tags
-      ==================================================
-    -->
+    
     <meta name="description" content="A highly motivated software engineering student skilled in HTML, CSS, React, and JavaScript. Eager to expand knowledge in .NET development and build innovative solutions.">
     <meta name="keywords" content="Chamuditha Hasaranga, Software Engineer, Software Student, React Developer, .NET, Java, C#, Portfolio, Web Developer">
     <meta name="author" content="Chamuditha Hasaranga">
     
-    <!-- Open Graph (for social media sharing) -->
+    
     <meta property="og:title" content="Chamuditha Hasaranga | Portfolio">
     <meta property="og:description" content="A highly motivated software engineering student skilled in HTML, CSS, React, and JavaScript.">
-    <!-- NOTE: Replace 'YOUR_WEBSITE_URL' with your actual live URL -->
+    
     <meta property="og:url" content="YOUR_WEBSITE_URL">
-    <!-- NOTE: Replace this with a link to a hosted 1200x630 image for social sharing -->
+    
     <meta property="og:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=Chamuditha+Hasaranga">
     <meta property="og:type" content="website">
     
-    <!-- Twitter Card (for Twitter sharing) -->
+   
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Chamuditha Hasaranga | Portfolio">
     <meta name="twitter:description" content="A highly motivated software engineering student skilled in HTML, CSS, React, and JavaScript.">
-    <!-- NOTE: Replace this with a link to a hosted 1200x630 image for social sharing -->
+   
     <meta name="twitter:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=Chamuditha+Hasaranga">
-    <!-- 
-      == End of SEO Meta Tags
-    -->
+   
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -50,30 +44,30 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        /* Base styles */
+       
         html {
             scroll-behavior: smooth;
         }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #030712; /* gray-950 */
-            color: #f9fafb; /* gray-50 */
-            /* New: Subtle tech-grid background */
+            background-color: #030712; 
+            color: #f9fafb; 
+           
             background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
             background-size: 20px 20px;
         }
 
-        /* Standard icon sizes */
+       
         .icon {
-            width: 1.25rem; /* 20px */
-            height: 1.25rem; /* 20px */
+            width: 1.25rem; 
+            height: 1.25rem; 
         }
         .icon-lg {
-            width: 2.5rem; /* 40px */
-            height: 2.5rem; /* 40px */
+            width: 2.5rem; 
+            height: 2.5rem; 
         }
         
-        /* Fade-in animation */
+       
         .fade-in-section {
             opacity: 0;
             transform: translateY(20px);
@@ -84,15 +78,15 @@
             transform: translateY(0);
         }
 
-        /* Subtle background gradient */
+       
         .section-bg-gradient {
             background-image: radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.05), transparent 30%),
                               radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05), transparent 30%);
         }
         
-        /* Back to top button styles */
+        
         #back-to-top {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -107,12 +101,12 @@
             transform: translateY(0);
         }
         
-        /* Typing cursor effect */
+        
         .typing-cursor {
             display: inline-block;
             width: 3px;
             height: 1em;
-            background-color: #a78bfa; /* violet-400 */
+            background-color: #a78bfa; 
             margin-left: 4px;
             animation: blink 0.7s infinite;
         }
@@ -121,7 +115,7 @@
             50% { opacity: 0; }
         }
         
-        /* New: Loader animation */
+       
         .animate-spin {
             animation: spin 1s linear infinite;
         }
@@ -136,18 +130,15 @@
     </style>
 </head>
 <body>
-    <!-- This is where your React app will be rendered -->
+    
     <div id="root"></div>
 
-    <!-- 
-      This script tag loads your React component.
-      The 'text/babel' type tells the Babel CDN to transpile your JSX.
-    -->
+   
     <script type="text/babel">
         const { useState, useEffect, Fragment } = React;
 
-        // --- Data for Components ---
-        // This makes it easy to add/remove items later
+        
+        
 
         const navLinks = [
             { name: "Home", href: "#home" },
@@ -196,7 +187,7 @@
             },
         ];
 
-        // --- UPDATED: Removed 'links' from projectsData ---
+        
         const projectsData = [
             {
                 title: "Todo Application",
@@ -238,7 +229,7 @@
             }
         ];
 
-        // --- React Components ---
+        
 
         const Header = () => {
             const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -297,7 +288,7 @@
                         </div>
                     </nav>
 
-                    {/* Mobile Menu (Hidden by default) */}
+                    {/* Mobile Menu  */}
                     <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} absolute top-16 left-0 w-full bg-gray-900/95 backdrop-blur-lg shadow-lg`} id="mobile-menu">
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             {navLinks.map((link) => (
@@ -372,12 +363,12 @@
                     timeoutId = setTimeout(type, typeSpeed);
                 }
                 
-                // Start after a delay
+                
                 timeoutId = setTimeout(type, 1000);
 
-                // Cleanup on component unmount
+                
                 return () => clearTimeout(timeoutId);
-            }, []); // Empty dependency array means this runs once on mount
+            }, []); 
 
             return (
                 <section id="home" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 section-bg-gradient">
@@ -405,12 +396,7 @@
                         </div>
                         {/* Image */}
                         <div className="md:w-2/5 flex justify-center">
-                            {/* ==================================================
-                            ==  IMPORTANT: Add your image
-                            ==================================================
-                            1. Put 'profile.jpg' in the same folder as 'index.html'.
-                            2. Change the 'src' below from the placeholder to "profile.jpg".
-                            */}
+                           
                             <img 
                                 src="profile.jpg" 
                                 alt="Chamuditha Hasaranga"
@@ -499,7 +485,7 @@
                         </h2>
                         <div className="grid md:grid-cols-2 gap-8">
                             {projectsData.map((project) => (
-                                // --- UPDATED: Removed bottom links, added padding to tag section ---
+                                
                                 <div key={project.title} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:shadow-indigo-500/30 transition-all duration-300 hover:-translate-y-2">
                                     <div className="p-6 flex-grow">
                                         <h3 className="text-xl font-semibold text-white mb-3">{project.title}</h3>
@@ -507,7 +493,7 @@
                                             {project.description}
                                         </p>
                                     </div>
-                                    <div className="p-6 bg-gray-800/50"> {/* Added pb-6 for spacing */}
+                                    <div className="p-6 bg-gray-800/50"> 
                                         <div className="flex flex-wrap gap-2">
                                             {project.tags.map((tag) => (
                                                 <span key={tag} className="bg-indigo-900 text-indigo-300 text-xs font-medium px-3 py-1 rounded-full">
@@ -516,7 +502,7 @@
                                             ))}
                                         </div>
                                     </div>
-                                    {/* --- REMOVED Links Div --- */}
+                                    
                                 </div>
                             ))}
                         </div>
@@ -533,7 +519,7 @@
                             Education
                         </h2>
                         <div className="relative border-l-2 border-gray-700/50 ml-4">
-                            {/* Timeline items */}
+                            
                             {educationData.map((item, index) => (
                                 <div key={index} className="mb-10 ml-8">
                                     <span className="absolute flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full -left-4 ring-8 ring-gray-900">
@@ -551,11 +537,11 @@
         };
 
         const Contact = () => {
-            // --- REMOVED: Gemini Feature State ---
             
-            // --- REMOVED: copyToClipboard Function ---
+            
+            
 
-            // --- REMOVED: generateSuggestion Function ---
+            
 
 
             return (
@@ -585,19 +571,19 @@
                             </div>
                         </div>
 
-                        {/* --- REMOVED: Gemini AI Feature Section --- */}
+                        
 
                         {/* Contact Form */}
                         <div className="mt-16 text-left">
                            
-                            {/* ==================================================
-                            ==  Formspree Integration
-                            ==================================================
-                            1. Go to https://formspree.io/ and create a new form.
-                            2. Copy your form's unique Endpoint URL.
-                            3. Replace the placeholder URL in the 'action' attribute below with your unique URL.
-                            ==================================================
-                            */}
+                             
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             <form action="https://formspree.io/f/xgvnjogr" method="POST" className="space-y-6">
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-medium text-gray-300">Your Name</label>
@@ -683,7 +669,7 @@
         // --- Main App Component ---
 
         const App = () => {
-            // This effect runs once after the component mounts
+            
             useEffect(() => {
                 // 1. Initialize Lucide Icons
                 try {
@@ -702,8 +688,8 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
-                            // Optional: unobserve after it's visible
-                            // observer.unobserve(entry.target);
+                            
+                            
                         }
                     });
                 }, {
@@ -724,8 +710,8 @@
                 };
             }, []); // Empty array ensures this runs only once on mount
 
-            // This effect runs every time the component updates
-            // We need this to re-create icons if the state changes (e.g., mobile menu)
+            
+            
             useEffect(() => {
                 if (typeof lucide !== 'undefined') {
                     lucide.createIcons();
@@ -755,4 +741,5 @@
     </script>
 </body>
 </html>
+
 
